@@ -38,12 +38,10 @@ table{
         rs.next();
 %>
 <h1>게시글 조회</h1>
-<table>
+<table border="1">
         <tr>               
             <th>번호</th>  
             <td><%=idx%></td>
-            <th>제목</th>
-            <td><%=rs.getString("title")%></td>  
             <th>작성자</th>
             <td><%=rs.getString("writer")%></td>
             <th>날짜</th>
@@ -56,10 +54,8 @@ table{
 			<td colspan="6"><%=rs.getString("title") %></td>
 		</tr>
 		<tr>
-			<th colspan="8">내용</th>
-		</tr>
-		<tr>
-			<td><%=rs.getString("content") %></td>
+			<th colspan="2">내용</th>
+			<td colspan="6"><%=rs.getString("content") %></td>
 		</tr>
 </table>
 

@@ -21,7 +21,6 @@ table{
 </head>
 <body>
 <%
-
 	try {
 
         String driverName = "oracle.jdbc.driver.OracleDriver"; 
@@ -46,15 +45,15 @@ table{
             <th>조회수</th>
         </tr>
 
-  	<%while(rs.next()){%>
- 		<tr>
-		<td><%=rs.getString(1)%></td>
-		<td><a href="content.jsp?idx=1"><%=rs.getString("title")%></a></td>
-		<td><%=rs.getString(3)%></td>
-		<td><%=rs.getString(4)%></td>
-		<td><%=rs.getString(5)%></td>
-		</tr>
-	<%}%>
+  	<%while(rs.next()){
+ 		out.print("<tr>");
+		out.print("<td>"+rs.getString(1)+"</td>");
+		out.print("<td>"+"<a href=content.jsp?idx="+rs.getString("idx")+">"+rs.getString("title")+"</a></td>");
+		out.print("<td>"+rs.getString(3)+"</td>");
+		out.print("<td>"+rs.getString(4)+"</td>");
+		out.print("<td>"+rs.getString(5)+"</td>");
+		out.print("</tr>");
+	}%>
 </table>
 <center><a href="write.jsp">글쓰기</a></center>
 
