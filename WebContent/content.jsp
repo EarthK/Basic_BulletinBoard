@@ -21,7 +21,7 @@ table{
 </head>
 <body>
 <%
-
+	String idx = request.getParameter("idx");
 	try {
 
         String driverName = "oracle.jdbc.driver.OracleDriver"; 
@@ -33,30 +33,35 @@ table{
         out.println("Oracle Database Connection Success.");
 
         Statement stmt = con.createStatement();        
-        String sql = "SELECT * FROM board ORDER BY idx DESC";
+        String sql = "SELECT * FROM board WHERE idx="+idx;
         rs = stmt.executeQuery(sql);
+        rs.next();
 %>
-<h1>자유 게시판</h1>
+<h1>게시글 조회</h1>
 <table>
-        <tr>                                  <!-- table태그 내에서 행을 정의할때 쓰는 태그입니다. -->
-            <th>번호</th>                     <!-- Table Header의 약자로 table태그 내에서 -->
-            <th>제목</th>                     <!-- 강조하고싶은 컬럼을 나타낼때 쓰는 태그입니다. -->
+        <tr>               
+            <th>번호</th>  
+            <td><%=idx%></td>
+            <th>제목</th>
+            <td><%=rs.getString("title")%></td>  
             <th>작성자</th>
+            <td><%=rs.getString("writer")%></td>
             <th>날짜</th>
+            <td><%=rs.getString("regdate")%></td>
             <th>조회수</th>
+            <td><%=rs.getString("count")%></td>
         </tr>
-
-  	<%while(rs.next()){%>
- 		<tr>
-		<td><%=rs.getString(1)%></td>
-		<td><a href="content.jsp?idx=1"><%=rs.getString("title")%></a></td>
-		<td><%=rs.getString(3)%></td>
-		<td><%=rs.getString(4)%></td>
-		<td><%=rs.getString(5)%></td>
+		<tr>
+			<th colspan="2">제목</th>
+			<td colspan="6"><%=rs.getString("title") %></td>
 		</tr>
-	<%}%>
+		<tr>
+			<th colspan="8">내용</th>
+		</tr>
+		<tr>
+			<td><%=rs.getString("content") %></td>
+		</tr>
 </table>
-<center><a href="write.jsp">글쓰기</a></center>
 
 <%
 	con.close();
