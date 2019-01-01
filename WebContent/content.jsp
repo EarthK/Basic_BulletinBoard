@@ -35,32 +35,16 @@ table{
         Statement stmt = con.createStatement();        
         String sql = "SELECT * FROM board WHERE idx="+idx;
         rs = stmt.executeQuery(sql);
-        rs.next();
-%>
-<h1>게시글 조회</h1>
-<table border="1">
-        <tr>               
-            <th>번호</th>  
-            <td><%=idx%></td>
-            <th>작성자</th>
-            <td><%=rs.getString("writer")%></td>
-            <th>날짜</th>
-            <td><%=rs.getString("regdate")%></td>
-            <th>조회수</th>
-            <td><%=rs.getString("count")%></td>
-        </tr>
-		<tr>
-			<th colspan="2">제목</th>
-			<td colspan="6"><%=rs.getString("title") %></td>
-		</tr>
-		<tr>
-			<th colspan="2">내용</th>
-			<td colspan="6"><%=rs.getString("content") %></td>
-		</tr>
-</table>
-
-<%
-	con.close();
+       	
+        if(rs.next()){
+        	request.setAttribute("idx", rs.getString("idx"));
+        	request.setAttribute("writer", rs.getString("writer"));
+        	request.setAttribute("regdate", rs.getString("regdate"));
+        	request.setAttribute("count", rs.getString("count"));
+        	request.setAttribute("title", rs.getString("title"));
+        	request.setAttribute("content", rs.getString("content"));
+        }
+		con.close();
 	}
 	catch (Exception e) {
         out.println("Oracle Database Connection Something Problem. <hr>");
@@ -68,5 +52,27 @@ table{
         e.printStackTrace();
     }	
 %>
+<h1>게시글 조회</h1>
+<table border="1">
+        <tr>               
+            <th>번호</th>  
+            <td>${idx}</td>
+            <th>작성자</th>
+            <td>${writer}</td>
+            <th>날짜</th>
+            <td>${regdate}</td>
+            <th>조회수</th>
+            <td>${count}</td>
+        </tr>
+		<tr>
+			<th colspan="2">제목</th>
+			<td colspan="6">${title}</td>
+		</tr>
+		<tr>
+			<th colspan="2">내용</th>
+			<td colspan="6">${content}</td>
+		</tr>
+</table>
+<a href="delete.jsp?idx=${idx}">삭제하기</a>
 </body>
 </html>
