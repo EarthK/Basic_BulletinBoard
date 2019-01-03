@@ -52,7 +52,7 @@ try {
  
 }finally{
 	 
-    out.print("<script>location.href='index.jsp';</script>");
+    out.print("<script>location.href='list.jsp';</script>");
 
 }
 

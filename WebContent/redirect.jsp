@@ -5,7 +5,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<script>location.href="index.jsp"</script>
+<script>location.href="list.jsp"</script>
 </head>
 <body>
 
